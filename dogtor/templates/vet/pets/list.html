@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+% extends "base.html" %}
 
 {% block title %}
 <title>Pets</title>
@@ -14,14 +14,16 @@
       <th>ID</th>
       <th>Name</th>
       <th>Type</th>
-      <th>Owner</th>
     </tr>
     {% for pet in pets %}
     <tr>
-      <td>{{ pet.id }}</td>
+      <td>
+        <a href="{% url 'vet:pets_detail' pk=pet.id  %}">
+          {{ pet.id }}
+        </a>
+      </td>
       <td>{{ pet.name }}</td>
       <td>{{ pet.type }}</td>
-      <td>{{ pet.owner }}</td>
     </tr>
     {% endfor %}
 </table>
