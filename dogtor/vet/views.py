@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from django.views.generic import View, TemplateView, ListView, DetailView, CreateView
+from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
 #from django.views.generic.edit import 
 from django.urls import reverse_lazy
 
 from .models import PetOwner, Pet
-from vet.forms import OwnerForm
+from vet.forms import OwnerForm, PetForm
 
 # Create your views here.
 # class Owners(View):
@@ -47,15 +47,22 @@ class OwnersDetail(DetailView):
     context_object_name = "owner"
 
 class OwnersCreate(CreateView):
+    model = PetOwner
     template_name = "vet/owners/create.html"
     form_class = OwnerForm
     success_url = reverse_lazy("vet:owners_list")   # vet es mascarilla
     # ver http://127.0.0.1:8000/vet/owners/add/
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     # This method is called when valid form data has been POSTed.
+    #     # It should return an HttpResponse.
+    #     form.send_email()
+    #     return super().form_valid(form)
+
+class OwnersUpdate(UpdateView):
+    model = PetOwner
+    form_class = OwnerForm
+    template_name = "vet/owners/update.html"
+    success_url = reverse_lazy("vet:owners_list")
 
 class PetsList(ListView):
     model = Pet
@@ -66,3 +73,15 @@ class PetsDetail(DetailView):
     model = Pet
     template_name = "vet/pets/detail.html"
     context_object_name = "pet"
+
+class PetsCreate(CreateView):
+    model = Pet
+    template_name = "vet/pets/create.html"
+    form_class = PetForm
+    success_url = reverse_lazy("vet:pets_list")   # vet es mascarilla
+
+class PetsUpdate(UpdateView):
+    model = Pet
+    form_class = PetForm
+    template_name = "vet/pets/update.html"
+    success_url = reverse_lazy("vet:pets_list")

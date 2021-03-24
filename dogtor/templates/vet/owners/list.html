@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>Owners</title>
+<title>Pet Owners</title>
 {% endblock title %}
 
 {% block header %}
-<h1>Owners list</h1>
+<h1>Pet Owners list</h1>
 {% endblock header %}
 
 {% block content %}
-<table>
+<table class="table">
     <tr>
       <th>ID</th>
       <th>First Name</th>
@@ -17,7 +17,11 @@
     </tr>
     {% for owner in owners %}
     <tr>
-      <td>{{ owner.id }}</td>
+      <th scope="row">
+        <a href="{% url 'vet:owners_detail' pk=owner.id  %}">
+          {{ owner.id }}
+        </a>
+      </th>
       <td>{{ owner.first_name }}</td>
       <td>{{ owner.last_name }}</td>
     </tr>

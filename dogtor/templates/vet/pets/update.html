@@ -1,15 +1,15 @@
-{# ver http://127.0.0.1:8000/vet/owners/add/ #}
+{# ver http://127.0.0.1:8000/vet/pets/add/ #}
 
 {% extends "base.html" %}
 
 {% load crispy_forms_tags %}
 
 {% block title %}
-<title>Create Owner</title>
+<title>Update Pet</title>
 {% endblock title %}
 
 {% block header %}
-<h1>Create Owner</h1>
+<h1>Update Pet</h1>
 {% endblock header %}
 
 {% block content %}
@@ -17,9 +17,7 @@
 <form method="POST">
     {% csrf_token %}
     {{ form|crispy}}
-        {# form.as_p #}
-        {# form.as_ul form.as_table form.as_p #}
-    <button type="submit">Crear dueño</button>
+  <button type="submit">Update pet</button>
 </form>
 
 {% endblock content %}
