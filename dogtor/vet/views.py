@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
 #from django.views.generic.edit import 
 from django.urls import reverse_lazy
@@ -79,6 +80,13 @@ class PetsCreate(CreateView):
     template_name = "vet/pets/create.html"
     form_class = PetForm
     success_url = reverse_lazy("vet:pets_list")   # vet es mascarilla
+    
+    def get_initial(self):
+        initial = {}
+        for queryparam in self.request.GET:
+            initial[queryparam] = self.request.GET[queryparam]
+
+        return initial
 
 class PetsUpdate(UpdateView):
     model = Pet
