@@ -1,6 +1,8 @@
 from django.urls import path
 
-from .views import  OwnersList, OwnersDetail, OwnersCreate, OwnersUpdate, PetsList, PetsDetail, PetsCreate, PetsUpdate
+from .views import  OwnersList, OwnersDetail, OwnersCreate, OwnersUpdate
+from .views import  PetsList, PetsDetail, PetsCreate, PetsUpdate
+from .views import  DatesCreate
 
 urlpatterns = [
     path("owners/", OwnersList.as_view(), name="owners_list"),
@@ -11,4 +13,5 @@ urlpatterns = [
     path("pets/add/", PetsCreate.as_view(), name="pets_create"),
     path("pets/<int:pk>/", PetsDetail.as_view(), name="pets_detail"),   #aqui el name es como un alias
     path("pets/<int:pk>/update/", PetsUpdate.as_view(), name="pets_update"),
+    path("dates/add/", DatesCreate.as_view(), name="dates_create"),
 ]

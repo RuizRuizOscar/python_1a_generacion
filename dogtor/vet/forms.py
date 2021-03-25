@@ -16,7 +16,7 @@
 
 from django import forms
 
-from .models import PetOwner, Pet
+from .models import PetOwner, Pet, PetDate
 
 
 class OwnerForm(forms.ModelForm):
@@ -35,3 +35,17 @@ class PetForm(forms.ModelForm):
         model = Pet
         fields = ["name", "type", "owner"]
         widgets = {"email ": forms.EmailInput()}
+
+class DateForm(forms.ModelForm):
+    class Meta:
+        model = PetDate
+        fields = ["datetime", "type", "pet"]
+        widgets = {
+            "datetime": forms.DateTimeInput(
+                format='%d/%m/%Y %H:%M',
+                attrs={ "type" : "text"
+                        # , "placeholder": "Escribe una fecha", 
+                        # "class": "clase-custom"
+                        }
+            )
+        }

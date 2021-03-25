@@ -1,0 +1,24 @@
+{# ver http://127.0.0.1:8000/vet/owners/add/ #}
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Create Date</title>
+{% endblock title %}
+
+{% block header %}
+<h1>Create Date</h1>
+{% endblock header %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form|crispy}}
+        {# form.as_p #}
+        {# form.as_ul form.as_table form.as_p #}
+    <button type="submit" class="btn btn-outline-primary">Create date</button>
+</form>
+
+{% endblock content %}
