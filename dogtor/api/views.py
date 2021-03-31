@@ -1,10 +1,15 @@
 from rest_framework import generics
-from vet.models import PetOwner, Pet, PetDate
 from django.shortcuts import render
+from vet.models import PetOwner, Pet, PetDate, BranchOffice
+from django.contrib.auth.models import User
+
 from .serializers import OwnersListSerializer,  OwnersSerializer
 from .serializers import PetsListSerializer,    PetsSerializer
 from .serializers import OwnerPetsSerializer,   PetOwnerSerializer
-
+from .serializers import DatesSerializer
+from .serializers import BranchOfficeListSerializer, BranchOfficeSerializer
+from .serializers import BranchOfficeDatesSerializer, DatesListSerializer
+from .serializers import UsersSerializer
 # # Create your views here.
 
 class ListOwnersAPIView(generics.ListAPIView):
@@ -37,6 +42,10 @@ class RetrievePetsOwnerAPIView(generics.RetrieveAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetOwnerSerializer
 
+class RetrieveUpdatePetsAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Pet.objects.all()
+    serializer_class = PetsSerializer
+
 # -----------------------------------------------------------
 
 class ListPetsAPIView(generics.ListAPIView):
@@ -59,8 +68,37 @@ class DestroyPetsAPIView(generics.DestroyAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetsSerializer
 
+# -----------------------------------------------------------
 
+class ListBranchOfficesAPIView(generics.ListAPIView):
+    queryset = BranchOffice.objects.all().order_by("id")
+    serializer_class = BranchOfficeListSerializer
 
+class CreateBranchOfficesAPIView(generics.CreateAPIView):
+    queryset = BranchOffice.objects.all()
+    serializer_class = BranchOfficeSerializer
+
+# -----------------------------------------------------------
+
+class CreateDatesAPIView(generics.CreateAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesSerializer
+
+# -----------------------------------------------------------
+# Ejercicio 4
+class RetrieveBranchOfficeDatesAPIView(generics.RetrieveAPIView):
+    queryset = BranchOffice.objects.all()
+    serializer_class = BranchOfficeDatesSerializer
+
+# -----------------------------------------------------------
+
+class CreateUsersAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UsersSerializer
+
+# class CreateDateAPIView(generics.RetrieveAPIView):
+#     queryset = PetDate.objects.all()
+#     serializer_class = PetOwnerSerializer*****
 
 # GenericViews
 

@@ -25,7 +25,8 @@ SECRET_KEY = 'v=9m6(hutsa^z7hwbx5!=2n9qz&aru6p3s1lsm6(k3+d(l0d+t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     # Installed apps
     'crispy_forms',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

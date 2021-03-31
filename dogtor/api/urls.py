@@ -3,6 +3,12 @@ from django.urls import path, include
 from .views import ListOwnersAPIView,   RetrieveOwnersAPIView,  CreateOwnersAPIView,    UpdateOwnersAPIView,    DestroyOwnersAPIView
 from .views import ListPetsAPIView,     RetrievePetsAPIView,    CreatePetsAPIView,      UpdatePetsAPIView,      DestroyPetsAPIView
 from .views import RetrieveOwnerPetsAPIView,    RetrievePetsOwnerAPIView
+from .views import ListBranchOfficesAPIView,    CreateBranchOfficesAPIView
+from .views import CreateDatesAPIView
+from .views import RetrieveBranchOfficeDatesAPIView
+from .views import RetrieveUpdatePetsAPIView
+    # Users
+from .views import CreateUsersAPIView
 
 urlpatterns = [
     path("owners/", ListOwnersAPIView.as_view(), name="list-owners"),
@@ -20,6 +26,15 @@ urlpatterns = [
     path("owners/<int:pk>/pets/", RetrieveOwnerPetsAPIView.as_view(), name="retrieve-owner-pets"),
     path("pets/", ListPetsAPIView.as_view(), name="list-pets"),
     path("pets/<int:pk>/", RetrievePetsOwnerAPIView.as_view(), name="retrieve-pets-owner"),
+    path("pets/<int:pk>/retrieve-update/", RetrieveUpdatePetsAPIView.as_view(), name="retrieve-update-pets"),
+
+    path("users/create/", CreateUsersAPIView.as_view(), name="create-users"),
+
+    path("dates/create/", CreateDatesAPIView.as_view(), name="create-dates"),
+
+    path("branchoffices/", ListBranchOfficesAPIView.as_view(), name="list-branch-offices"),
+    path("branchoffices/create/", CreateBranchOfficesAPIView.as_view(), name="create-branch-offices"),
+    path("branchoffices/<int:pk>/dates/", RetrieveBranchOfficeDatesAPIView.as_view(), name="retrieve-branch-offices-dates"),
 ]
 
 # http://127.0.0.1:8000/api/owners/
