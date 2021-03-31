@@ -10,6 +10,8 @@ from .views import RetrieveUpdatePetsAPIView
     # Users
 from .views import CreateUsersAPIView
 
+from rest_framework.authtoken import views
+
 urlpatterns = [
     path("owners/", ListOwnersAPIView.as_view(), name="list-owners"),
     path("owners/create/", CreateOwnersAPIView.as_view(), name="create-owners"),
@@ -29,7 +31,7 @@ urlpatterns = [
     path("pets/<int:pk>/retrieve-update/", RetrieveUpdatePetsAPIView.as_view(), name="retrieve-update-pets"),
 
     path("users/create/", CreateUsersAPIView.as_view(), name="create-users"),
-
+    path("users/login/", views.obtain_auth_token, name="login-users"), # si no tiene token lo crea
     path("dates/create/", CreateDatesAPIView.as_view(), name="create-dates"),
 
     path("branchoffices/", ListBranchOfficesAPIView.as_view(), name="list-branch-offices"),
